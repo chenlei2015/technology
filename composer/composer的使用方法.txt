@@ -1,0 +1,70 @@
+composer使用方法
+
+1.window安装composer 下载Composer-Setup.exe 网址https://getcomposer.org
+
+2.测试安装是否成功 cmd命令行 输入 composer -v 如果出来版本信息即成功
+
+3.以yii框架为例
+
+3.1  首先输入 composer global require "fxp/composer-asset-plugin:~1.1.1" 来安装Composer Asset插件 执行该命令后会出现如下提示
+
+E:\software\xampp\htdocs\simple>composer global require "fxp/composer-asset-plugin:~1.1.1"
+Changed current directory to C:/Users/chenl/AppData/Roaming/Composer
+./composer.json has been created
+
+3.2  进入到xammp/htdos/目录后，输入 composer.phar create-project yiisoft/yii2-app-advanced advanced 2.0.9
+
+说明：此命令的意思是 把版本为2.0.9的yii框架下载到本地目录advanced中
+
+3.3 看一看下载的代码中有没有vendor目录，在看一看有没有composer.json框架依赖配置文件
+
+3.4 如果没有vendor目录，进入到advanced目录下 执行composer update命令 生成vendor目录 如果此过程需要token 会出现如下提示：
+
+You can also add it manually later by using "composer config github-oauth.github.com <token>"
+Reading bower.json of bower-asset/jquery.inputmask (3.1.13)
+Could not fetch https://api.github.com/repos/RobinHerbots/jquery.inputmask/contents/bower.json?ref=1d2a93fd4890ec65056b84136326ec8d7f484ca8, please create a GitHub OAuth token to go over the API rate limit
+Head to https://github.com/settings/tokens/new?scopes=repo&description=Composer+on+DESKTOP-IGKBIG2+2016-08-10+0636
+to retrieve a token. It will be stored in "C:/Users/chenl/AppData/Roaming/Composer/auth.json" for future use by Composer.
+Token (hidden): 
+
+到这个网站生成token https://github.com/settings/tokens/new?scopes=repo&description=Composer+on+DESKTOP-IGKBIG2+2016-08-10+063，然后
+把生成的token按如下格式配置到C:/Users/chenl/AppData/Roaming/Composer/auth.json中，如果composer目录中没有auth.json,自己创建。
+
+{
+    "github-oauth": {
+        "github.com": "b9bf909e021f02e03c3f6b0d2b87a8e500b22b95"//此为token值
+    }
+}
+
+4.cmd 常用命令
+
+进入E盘：e:
+
+切换目录 cd 
+
+显示目录下的文件及目录 dir
+
+安装yii扩展 两种方式（前提切换路径到项目目录下） 
+1.通过修改composer.json文件，然后执行 composer update命令即可
+例如想安装 yiisoft/yii2-imagine 扩展，可按如下示例修改你的 composer.json 文件：
+
+{
+    // ...
+
+    "require": {
+        // ... other dependencies
+
+        "yiisoft/yii2-imagine": "*"
+    }
+}
+
+2.通过composer命令(三步骤)
+
+a: >E:
+
+b: >cd software\xampp\htdocs\item\common 
+
+c: software\xampp\htdocs\item\common> composer require "yiisoft/yii2-imagine": "*" --prefer-dist  //使该的命令进行插件下载 此命令不会进行插件追踪
+
+
+

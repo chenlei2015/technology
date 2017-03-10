@@ -1,0 +1,43 @@
+删除member表的字段
+
+alter table `dfs_member` drop center_refuse_text;
+
+alter table `dfs_member` drop operator_service_center;
+
+为service_center_info表添加字段
+
+alter table dfs_service_center_info add center_add_time datetime DEFAULT '0000-00-00 00:00:00' COMMENT '服务中心申请时间';
+
+alter table dfs_service_center_info add operator_center_first varchar(100) DEFAULT NULL COMMENT '服务中心一审审核操作员';
+
+alter table dfs_service_center_info add operator_first_time datetime DEFAULT '0000-00-00 00:00:00' COMMENT '服务中心一审审核时间';
+
+alter table dfs_service_center_info add center_grade tinyint(1) NOT NULL DEFAULT '0' COMMENT '服务中心等级' AFTER operator_first_time;
+
+alter table dfs_service_center_info add bond_status tinyint(1) NOT NULL DEFAULT '0' COMMENT '服务中心保证金激纳状态 0 ：未激纳 1：已激纳 ' AFTER bond_amount;
+
+alter table dfs_service_center_info add operator_center_second varchar(100) DEFAULT NULL COMMENT '服务中心二审审核操作员' 
+
+alter table dfs_service_center_info add operator_second_time datetime DEFAULT '0000-00-00 00:00:00' COMMENT '服务中心二审审核时间';
+
+alter table dfs_service_center_info add center_refuse_text varchar(200) NOT NULL COMMENT '服务中心拒绝原因';
+
+改member表字段属性
+
+alter table dfs_member modify `is_service_center` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是服务中心 0不是 1是 2 待一审 3 拒绝 4 待二审';
+
+为pd_recharge表添加字段
+
+alter table dfs_pd_recharge add pdr_recharge_type tinyint(1) NOT NULL DEFAULT '0'  COMMENT '充值类型 0：钱包充值 1:激纳保证金' after pdr_payment_state;
+
+创建服务中心等级表
+
+CREATE TABLE `dfs_service_center_grade` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `center_grade` tinyint(1) NOT NULL DEFAULT '1' COMMENT '服务中心等级',
+  `bond_amount` decimal(10,2) DEFAULT '0.00' COMMENT '服务中心保证金',
+  `rebate_image` varchar(100) DEFAULT NULL COMMENT '该等级的服务中心返利视图',
+  `create_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '等级创建时间',
+  `create_by` varchar(100) DEFAULT NULL COMMENT '等级创建者',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='服务中心等级信息表';

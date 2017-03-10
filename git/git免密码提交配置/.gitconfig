@@ -1,0 +1,12 @@
+[gui]
+[user]
+	email = chenlei2015@yeah.net
+	name = chenlei2015@yeah.net
+[credential "chenlei2015@yeah"]
+	net = chenlei1987
+[core]
+	ignorecase=false
+	autocrlf = true
+	excludesfile = C:\\Users\\chenl\\Documents\\gitignore_global.txt
+[push]
+	default = matching

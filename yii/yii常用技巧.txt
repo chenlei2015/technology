@@ -1,0 +1,13 @@
+打印sql语句
+
+//获取查询对象
+$query=Member::find();
+
+//获取sql语句字符串
+$sql=$query->createCommand()->getRawSql();
+
+//把sql语句和原页面内容都显示到页面上
+\common\helpers\Debug::pr($sql,false);
+
+把sql语句显示到页面上，原页面内容都不显示到页面上
+\common\helpers\Debug::pr($sql);

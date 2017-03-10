@@ -1,0 +1,69 @@
+一：yii2.0创建多应用目录的方法（以高级模板为例，wechat 与 frontend 同级目录）
+
+
+我们知道默认的高级应用模板包括三个应用
+
+backend - 应用的后台
+
+frontend - 应用的前台
+
+console - 应用的控制台应用
+
+那么如果我们要在增加应用呢？比如在加一个微信的应用，或者后台和前台应用的名字需要修改。
+
+那么现在就来再增加一个名字为wechat的子应用。
+
+在frontend同目录新建一个名为wechat文件夹.
+
+然后呢把frontend目录下面的东西全拷贝到wechat目录里面
+
+1.修改wechat/config/main.php配置项的所有“frontend”字符串替换为“wechat”;
+
+2.最后就是加一个别名了，例子可以看common/bootstrap.php的写法，写法为：Yii::setAlias('@wechat', dirname(dirname(__DIR__)) . '/wechat');
+
+说明：这里我们不改这个全局配置文件也行，我们在weixin/config/bootstrap.php文件添加也行。添加为：Yii::setAlias('wechat', dirname(dirname(__DIR__)) . '/wechat');
+
+至此，我们的应用weixin就可以正常访问了，当然各个文件的命名空间声明和引入你要改为由frontend改为weixin。
+
+同理你可以新建无数个，还可可以把默认的三个应用重命名为你想要的名字。
+
+二：yii2.0 块赋值与验证
+
+得到formmodel或activemodel的实例$model->load()时，进行的是块赋值，赋值的是对应场景的下的所有属性，
+
+$model->validate()时 是调用的rule()方法下的所有适用该场景字段属性验证规则进行验证;$model->save(flase)忽略验证；$model->save()会进行规则验证
+
+
+$model=new user();//user为 yii\base\Model类的子类；
+
+$model->scenario = 'register';//当前场景为注册场景；
+
+if（$model->load(Yii::$app->reques->post,'') && $model->save()）{
+
+		echo "注册成功！";
+
+}else{
+	
+                echo "注册失败！";
+}
+
+说明：
+$model->load(Yii::$app->reques->post,'')时，进行的是块赋值，赋值的是register场景的下的所有字段属性，当所接受的参数中不含[formModel]['name']而是['name']时；传入第二个参数为空字符串,为了忽略formMode的名称的检查；
+
+$model->save()时是插入数据或修改数据；他会调用validate()方法；validate（）方法会根据当前场景下的字段属性；从rules()返回的数值中挑选出每个字段属性的验证规则；在该场景下不包含的字段属性的验证规则将会被抛弃；如果出现错误；
+
+可以通过如下代码打印出验证错误的字段；
+
+$model->validate();
+
+var_dump($model->getErrors())或 var_dump($model-errors);
+
+补充说明：
+
+[['username', 'email', 'password'], 'required', 'requiredValue'=>'必填值','message'=>'提示信息',on' => 'register'，'except'=>'login'],on表示这条规则只在register场景下应用；except表示这条规则除了login场景不应用；其他场景都应用；
+
+
+
+
+
+

@@ -1,0 +1,237 @@
+概念：本地git仓库分为三个区：
+
+工作区（工作目录）：正在编写代码的工作目录
+
+缓存区（暂存区）：git add 后的代码区
+
+head区（提交区）：git commit后的代码区
+
+经验：在开发环境下五部曲 ： git status -> git add -A -> git commit -m "" -> git pull(是否有冲突) -> git push
+      在Linux生产环境中: git pull 就可以了，前提是要切换到要发布的分支下
+
+1.git无密码登录
+
+1.1 创建文件存储GIT用户名和密码
+
+在%HOME%目录中，一般为C:\users\Administrator，也可以是你自己创建的系统用户名目录，反正都在C:\users\中。文件名为.git-credentials,由于在Window中不允许直接
+创建以"."开头的文件，所以需要借助git bash进行，打开git bash客户端，进入%HOME%目录，然后用touch创建文件 .git-credentials, 用vim编辑此文件，输入内容格式：
+
+touch .git-credentials
+
+vim .git-credentials
+
+https://{username}:{password}@github.com
+
+1.2 添加Git Config 内容
+
+进入git bash终端， 输入如下命令：
+
+git config --global credential.helper store
+
+执行完后查看%HOME%目录下的.gitconfig文件，会多了一项：
+
+[credential]
+
+    helper = store
+重新开启git bash,当git push时再次输入一下用户名和密码，以后就不用再输入密码了
+
+2.git的常用密令
+
+git init 创建版本仓库
+
+说明：打开git bash 首先创建一个目录 然后切换到该目录下面 输入 git init
+
+git clone URL 
+
+说明：把远程仓库的master分支下载到本地 作为本地仓库
+
+git checkout -b dev origin/dev  
+
+说明：该命令以远程已存在的分支origin/dev为基础创建本地分支dev,并在本地切换到dev分支，同时也创建了本地分支dev与远程分支origin/dev的追踪关系；
+
+git branch -vv
+
+说明 该命令用于查看本地分支与远程分支的追踪关系  也可以使用cat .git/congig  也可以使用 git config -e 编辑追踪关系 
+
+git branch --set-upstream dev origin/dev
+
+说明 该命令手动创建本地分支dev与远程分支origin/dev的追踪关系；
+
+git branch 
+
+说明：查看本地分支列表
+
+git branch -r 
+
+说明：先git pull 再用此命令查看远程分支列表
+
+git branch -a
+
+说明：查看本地分支列表和远程分支列表
+
+git branch dev
+
+说明：创建本地分支dev  使用 git checkout dev  切换到dev分支
+
+git checkout -b dev
+
+说明：创建并切换到dev
+
+git branch -d dev 
+
+说明 ：删除本地dev分支
+
+git push origin dev
+
+说明: 创建远程分支dev
+
+git push origin --delete dev
+
+说明： 删除远程的dev分支
+
+git status 
+
+说明：查看你都增加、删除、修改了那些文件
+
+git add -A 或 git add --all
+
+说明：该命令把工作区所有目录的增加、删除、修改都提交到暂存区 这时暂存区对应的文件放生改变 如果想从暂存区撤销这些改变 可以使用 git reset HEAD --file 命令取消缓存区已经缓存的内容
+
+git add . 或 git add * 
+
+说明：该命令把工作区当前目录下的所有增加、删除、修改都提交到暂存区
+
+git checkout --file 
+
+说明：撤销工作区对此文件的的修改
+
+git commit -m "注释内容"
+
+说明：把缓存区的代码保存提交到HEAD区
+
+git pull 
+
+说明：当前分支自动与唯一一个和它存在追踪的远程分支进行合并
+
+git pull origin dev:dev 
+
+说明：取回远程主机dev分支的更新，再与本地的dev分支合并 一般格式为 git pull <远程主机名> <远程分支名>:<本地分支名> 详细的解释请看 易百git教程 的 git pull详解 http://www.yiibai.com/git/git_pull.html
+
+git push 
+
+说明：不带任何参数的git push，默认只推送当前分支，这叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用matching方法，
+      现在改为默认采用simple方式。如果要修改这个设置，可以采用git config命令。
+	  git config --global push.default matching
+      或者
+      git config --global push.default simple （如果 git 版本比较早的话，可以使用 current 模式）
+      详解请看http://www.yiibai.com/git/git_push.html
+	  
+git merge dev
+
+说明：将dev分支合并到当前分支,如果想撤销这次合并 使用git log 获取merge前的版本号（commit 61959cb54ebd367e6c1236c3db5fe7b55417fd9b）,然后使用 git reset --hard 61959cb54ebd367e6c1236c3db5fe7b55417fd9b 命令 执行后即可回到合并前的版本	 
+
+
+git rm --cached project.iws （Git忽略已经跟踪的文件）
+
+
+说明：某工程project用Git管理代码，但是在他的根目录下有个配置文件，比如project.iws是不需要git每次跟踪它的修改记录的。
+
+一般做法是在.gitignore文件中添加一行
+
+project.iws
+
+但是这个文件如果之前已经被git跟踪了，这样修改是没有用的。每次修改完以后，用git status还是能看到提示它被修改了。
+
+解决办法就是在git中删除这个文件的跟踪记录，用这个命令
+
+git rm --cached project.iws
+
+这样就从git的跟踪记录中删除了这个文件的跟踪记录。配合之前在.gitignore加的那行配置，以后你修改 project.iws 这个文件，git就不会有提示了。
+
+常用功能 
+
+创建远程分支的步骤
+
+一、git branch dev // 首先在本地创建一个分支dev
+二、git push origin dev // 把本地分支dev 推送到远程；推送成功后，远程就会创建dev分支 用git branch -vv 可查看出本地分支dev与远程分支dev，并没有建立追踪关系
+三、git branch -d dev //删除本地分支dev
+四、git checkout -b dev origin/dev // 以远程的分支dev为基础创建本地分支dev 这样本地分支dev与远程分支dev 就建立了追踪关系
+
+回退
+
+未执行git add 命令时 使用如下命令回退对某个文件的修改
+
+git checkout index.php
+
+未执行git add 命令时 使用如下命令回退对全部文件的修改
+
+git checkout
+
+执行了 git  add 或 git commit时 使用如下命令回退对全部文件的修改(工作区不会变化)
+
+git reset --hard 
+
+执行了 git push 使用如下命令回退到某个版本 然后使用git push 线上的版本就会是这个版本
+
+git revert c011eb3c20ba6fb38cc94fe5a8dda366a3990c61
+
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库
+
+git reset HEAD^ //回退至上一版本, 并重置缓存区
+git reset HEAD~10 //回退至10个版本之前, 并重置缓存区
+git reset --soft HEAD //回退时不重置缓存区和工作区
+git reset --mixed HEAD //回退时重置缓存区, 默认选项
+git reset --hard HEAD //回退时重置缓存区和工作区
+git reset //不指定HEAD, 用来清空缓存区的修改
+git reset filename //清空缓存区指定文件的修改
+git reset --hard //不指定HEAD, 用来清空工作区和缓存区的修改
+git reset --hard filename //清空工作区和缓存区指定文件的修改
+git checkout branch //切换branch, 同时重置缓存区和工作区, 如果工作区有修改没有提交, 需要先commit或stash
+git checkout branch --force //切换branch, 同时重置缓存区和工作区
+git checkout --force //不指定branch, 用来清空工作区的修改(缓存区不变, 如果之前有add, 则工作区与缓存区一致)
+git checkout -- filename //清空工作区指定文件的修改
+
+.gitignore 文件的使用方法
+
+说明：.gitignore文件只能忽略那些原来没有被追踪的文件，如果某些文件已经被纳入了版本管理中（git commit 之后），则修改.gitignore是无效的。
+如果要取消已经被纳入了版本管理中的文件追踪关系；采用如下步骤：
+
+    操作步骤如下：
+    1、git rm --cached path/to/xxx.file
+    2、更新 .gitignore 忽略掉目标文件
+    3、git commit -m "We really don't want Git to track this anymore!"
+
+这种方法 只是删除了追踪状态；其实目标文件还在版本库中；只是以后本地再修改这个目标文件；版本库中的目标文件不再改变；既不会再追踪这个文件；
+但是这个方法的缺点也很明显，当你要clone这个版本库到本地时；这个目标文件不会被clone下来。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
