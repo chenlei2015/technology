@@ -22,7 +22,7 @@ alter table shopnc_member modify `register_method` tinyint(2) NOT NULL DEFAULT '
 update shopnc_member set wechat_bind='Y' where member_id in (select member_id from shopnc_member_maping_wechat where member_id is not null);//更新数据加子查询
 
 
-update shopnc_member set register_method =3 where member_passwd='' and register_method=0;//更新
+update shopnc_member set register_method =3 where member_passwd='' and register_method=0; //更新
 
 alter TABLE shopnc_order add `center_id`  int(11) DEFAULT '0' COMMENT '服务中心id' AFTER rebate_id ;//添加字段
 
