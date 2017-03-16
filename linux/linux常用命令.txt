@@ -1,16 +1,35 @@
+linxu的命令帮助查询(三种方式)
+
+1. ls --help
+
+2. man ls （退出按q）
+
+3. /usr/share/doc/程序名/txts/READE.*  每个程序的命令帮助文档)
+
+
 linux命令：
 
-1.ls -lash （window dir）
+shutdown （关机 普通用户没有关机权限 只有root可以）
 
-列举文件及目录列表
+reboot (重启 把服务到关闭后 才重启 普通用户没有关机权限 只有root可以)
 
-2.命令查询帮助以date命令为例
+poweroff (关机 把服务到关闭后 才关机 普通用户没有关机权限 只有root可以)
 
-date --help
+init （运行级别）
 
-man date
+说明：
+runlevel （查看系统当前运行的级别）
 
-3.linux命令：
+运行级就是操作系统当前正在运行的功能级别。这个级别从0到6 ，具有不同的功能；
+init 0 关机（千万不能把initdefault 设置为0） 
+init 1 单用户模式 
+init 2 多用户，没有 NFS(和级别3相似，会停止部分服务) 
+init 3 完全多用户模式 
+init 4 没有用到 
+init 5 x11(Xwindow) 
+init 6 重新启动（千万不要把initdefault 设置为6）
+
+ls -lash （window dir）列举文件及目录列表
 
 cal 日历
 
@@ -19,6 +38,10 @@ bc 计算器
 date 日期时间
 
 history 调出所用命令的历史 使用 !+序号 可以再次执行这个使用过的命令
+
+sync 把缓存或内存的数据存到磁盘
+
+
 
 
 
