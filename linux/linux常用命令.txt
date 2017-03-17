@@ -22,14 +22,24 @@ runlevel （查看系统当前运行的级别）
 
 运行级就是操作系统当前正在运行的功能级别。这个级别从0到6 ，具有不同的功能；
 init 0 关机（千万不能把initdefault 设置为0） 
-init 1 单用户模式 
+init 1 单用户模式 （如果忘级root密码，可以进入此模式修改root密码,然后登陆，不用重装系统）
 init 2 多用户，没有 NFS(和级别3相似，会停止部分服务) 
-init 3 完全多用户模式 
+init 3 完全多用户模式 （在此运行级别,可以用startx命令启动图形化界面）
 init 4 没有用到 
 init 5 x11(Xwindow) 
 init 6 重新启动（千万不要把initdefault 设置为6）
 
+用户信息的集中目录
+
+etc/passwd (用户账号)
+
+etc/shadow (用户密码)
+
+etc/group  (用户组)
+
 ls -lash （window dir）列举文件及目录列表
+
+ls -ld home 显示home目录的属性
 
 cal 日历
 
@@ -42,6 +52,7 @@ history 调出所用命令的历史 使用 !+序号 可以再次执行这个使用过的命令
 sync 把缓存或内存的数据存到磁盘
 
 
+操作文件及目录权限的命令
 
 
 
