@@ -209,10 +209,11 @@ git checkout -- filename //清空工作区指定文件的修改
 但是这个方法的缺点也很明显，当你要clone这个版本库到本地时；这个目标文件不会被clone下来。
 
 
+查看某一行代码的修改历史
 
+git blame file_name
 
-
-
+例：git blame web/index.php
 
 
 

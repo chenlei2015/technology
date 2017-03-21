@@ -94,8 +94,46 @@ q ：离开 less 这个程序；
 8.od 以二进制的方式读取文件内容！
 
 修改文件时间或创建新文件
+1.touch （创建一个空的文件；将某个文件日期修订为目前 （ mtime 与 atime））
 
-1.touch
+指令与文件的搜寻
+1.which (搜寻可执行文件-即命令)
+-a  将所有由 PATH 目录中可以找到的指令均列出，而不止第一个被找到的指令名称
+例：which cd
+
+2.whereis ( 由一些特定的目录中寻找文件文件名)
+-l :可以列出 whereis 会去查询的几个主要目录而已
+-b :只找 binary 格式的文件
+-m :只找在说明文档 manual 路径下的文件
+-s :只找 source 来源文件
+-u :搜寻不在上述三个项目当中的其他特殊文件
+
+3.locate：依据 /var/lib/mlocate 内的数据库记载，找出使用者输入的关键字文件名 如果你忘记某个文件的完整文件名时 使用此命令比较好
+4.updatedb：根据 /etc/updatedb.conf 的设置去搜寻系统硬盘内的文件名，并更新/var/lib/mlocate 内的数据库文件；
+
+5.  find [PATH] [option] [action]
+例子：find /home -name  1.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
