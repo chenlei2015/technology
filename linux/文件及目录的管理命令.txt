@@ -57,6 +57,8 @@
 
 -rf  强制递归移除文件或目录
 
+例如 rm -rf crm  当前目录位于/home/www/dfs168目录 强制删除当前目录下的crm目录及crm中的所有文件及目录(/home/www/dfs168/crm)
+
 4.mv （ 移动文件与目录，或更名）
 
 -i ：若目标文件 （ destination） 已经存在时，就会询问是否覆盖！
@@ -94,6 +96,8 @@ q ：离开 less 这个程序；
 
 8.od 以二进制的方式读取文件内容！
 
+9.strings 以字符串的形式读取文件；
+
 修改文件时间或创建新文件
 1.touch （创建一个空的文件；将某个文件日期修订为目前 （ mtime 与 atime））
 
@@ -102,7 +106,7 @@ q ：离开 less 这个程序；
 -a  将所有由 PATH 目录中可以找到的指令均列出，而不止第一个被找到的指令名称
 例：which cd
 
-2.whereis ( 由一些特定的目录中寻找文件文件名)
+2.whereis ( 由一些特定的目录中寻找命令)
 -l :可以列出 whereis 会去查询的几个主要目录而已
 -b :只找 binary 格式的文件
 -m :只找在说明文档 manual 路径下的文件
@@ -113,7 +117,12 @@ q ：离开 less 这个程序；
 4.updatedb：根据 /etc/updatedb.conf 的设置去搜寻系统硬盘内的文件名，并更新/var/lib/mlocate 内的数据库文件；
 
 5.  find [PATH] [option] [action]
-例子：find /home -name  1.txt
+例子：find /home -name/size/user/uid  1.txt
+
+6. grep 关键词  文件名 (在对应的文件里搜素关键词)
+
+例子：grep chen  1.txt 
+
 
 
 

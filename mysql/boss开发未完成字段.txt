@@ -41,3 +41,4 @@ CREATE TABLE `dfs_service_center_grade` (
   `create_by` varchar(100) DEFAULT NULL COMMENT '等级创建者',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='服务中心等级信息表';
+
