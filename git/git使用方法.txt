@@ -35,6 +35,7 @@ git config --global credential.helper store
     helper = store
 重新开启git bash,当git push时再次输入一下用户名和密码，以后就不用再输入密码了
 
+
 2.git的常用密令
 
 git init 创建版本仓库
@@ -152,8 +153,8 @@ git rm --cached project.iws
 
 创建远程分支的步骤
 
-一、git branch dev // 首先在本地创建一个分支dev
-二、git push origin dev // 把本地分支dev 推送到远程；推送成功后，远程就会创建dev分支 用git branch -vv 可查看出本地分支dev与远程分支dev，并没有建立追踪关系
+一、git branch dev // 首先以当前分支为基础在本地创建一个分支dev
+二、git push origin dev // 把本地分支dev 推送到远程；推送成功后，远程就会创建dev分支 用git branch -vv 可查看出本地分支dev与远程分支dev，此时并没有建立追踪关系
 三、git branch -d dev //删除本地分支dev
 四、git checkout -b dev origin/dev // 以远程的分支dev为基础创建本地分支dev 这样本地分支dev与远程分支dev 就建立了追踪关系
 
