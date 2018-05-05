@@ -2,7 +2,7 @@ composer使用方法
 
 1.window安装composer 下载Composer-Setup.exe 网址https://getcomposer.org
 
-2.测试安装是否成功 cmd命令行 输入 composer -v 如果出来版本信息即成功
+2.测试安装是否成功 cmd命令行 输入  如果出来版本信息即成功
 
 3.以yii框架为例
 
@@ -66,5 +66,9 @@ b: >cd software\xampp\htdocs\item\common
 
 c: software\xampp\htdocs\item\common> composer require "yiisoft/yii2-imagine": "*" --prefer-dist  //使该的命令进行插件下载 此命令不会进行插件追踪
 
+kartik-v/yii2-widget-activeform: "@dev"
+composer require "kartik-v/yii2-widget-activeform": "@dev" --prefer-dist
+
+composer require "kartik-v/yii2-helpers": "dev-master" --prefer-dist
 
 

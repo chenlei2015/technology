@@ -1,0 +1,84 @@
+
+
+//添加字段 默认放在最后
+
+alter TABLE shopnc_member add `center_refuse_text` varchar (200) NOT NULL COMMENT '服务中心拒绝原因';
+
+//在 is_service_center 字段之后添加 center_refuse_text 字段
+
+alter TABLE shopnc_member add `center_refuse_text`  varchar (200) NOT NULL COMMENT '服务中心拒绝原因' AFTER is_service_center;
+
+//修改字段属性
+
+alter TABLE shopnc_voucher modify voucher_store_id int(11) NOT NULL DEFAULT '0' COMMENT '可以使用此代金券的店铺id' AFTER voucher_limit ;
+
+//更新
+
+update shopnc_member set register_method =3 where member_passwd='' and register_method=0;
+
+//更新数据加子查询
+
+update shopnc_member set wechat_bind='Y' where member_id in (select member_id from shopnc_member_maping_wechat where member_id is not null);
+ 
+//给表加注释
+
+ALTER TABLE shopnc_order COMMENT='这是订单表';
+
+//删除表字段
+
+alter table `dfs_member` drop center_refuse_text;
+
+//查询表结构
+
+desc shopnc_member
+
+//创建表
+
+CREATE TABLE `shopnc_order_remark` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '备注编号',
+  `order_id` int(11) unsigned NOT NULL COMMENT '订单id',
+  `store_id` int(10) unsigned NOT NULL COMMENT '店铺id',
+  `remark_member_id` int(10) unsigned NOT NULL COMMENT '备注人member_id',
+  `remark_person` varchar(255) NOT NULL COMMENT '备注人用户名',
+  `remark_person_truename` varchar(255) DEFAULT NULL COMMENT '备注人真实名',
+  `remark_content` varchar(100) DEFAULT NULL COMMENT '备注内容',
+  `remark_status` tinyint(2) unsigned NOT NULL COMMENT '备注状态 10：售前未接通 20：售前已接通  30：售后未接通 40：售后已接通 50：客服已完成  60：非客服备注',
+  `remark_time` int(10) unsigned NOT NULL COMMENT '备注时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='订单备注表';
+
+//删除表
+
+DROP DATABASE shopnc_order_remark
+
+//将普通时间格式转换为UNIX时间戳的形式返回 UNIX_TIMESTAMP()
+SELECT * from shopnc_member where member_time > UNIX_TIMESTAMP('2017-11-11 11:11:11');
+
+//将UNIX时间戳的时间转换为普通格式的时间 FROM_UNIXTIME(member_time)
+
+SELECT SELECT FROM_UNIXTIME(member_time) from shopnc_member where member_time > UNIX_TIMESTAMP('2017-11-11 11:11:11');
+
+//去除重复的buyer_id
+
+SELECT DISTINCT buyer_id FROM shopnc_order;
+
+//mysql版本信息
+
+SELECT VERSION( )
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

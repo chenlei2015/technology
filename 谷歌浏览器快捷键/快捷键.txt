@@ -12,12 +12,30 @@ Ctrl+H 查看”历史记录”页
 
 Ctrl+J 查看”下载”页 
 
-Shift+Esc 查看任务管理器 
+Shift+Esc 查看查看浏览器任务管理器
+
+F3 浏览器页面搜索 
 
 F6 选中地址栏的内容
 
+F11 浏览器全屏
+
+F12 调取控制台
+
+window + d 隐藏浏览器 
+
+Ctrl+shift+Esc 任务管理器
+
+window+e 文件资源管理器
+
+Ctrl+w 关闭当前窗口
+
+
+
 Ctrl+Shift+Delete（方向键上的delete） 调出清除浏览器的数据弹出框
 
-Ctrl+Enter 控制台console的代码书写多行模式
+Ctrl+Enter 浏览器调试控制台console的代码书写多行模式
+
+window+tab 任务视图
 
 
