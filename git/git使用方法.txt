@@ -212,10 +212,10 @@ git checkout -- filename //清空工作区指定文件的修改
 
 
 
-git log -p web/index.php  查看某个文件的修改历史
+git log -p web/index.php  查看某个文件提交历史
 
 
-git blame file_name 查看某一行代码的修改历史  例：git blame web/index.php
+git blame file_name 查看某一个文件最近每行代码是谁修改的  例：git blame web/index.php
 
 
 git log fixedBug 查看fixedBug分支的commit记录 可以获取该分支的commit_id（61959cb54ebd367e6c1236c3db5fe7b55417fd9b）
@@ -223,8 +223,16 @@ git log fixedBug 查看fixedBug分支的commit记录 可以获取该分支的commit_id（61959cb
 
 git log --author=chenlei2015@yeah.net --merges 查看某个人的合并代码记录
 
+git log --author=chenlei2015@yeah.net --stat  查看某个人的代码提交记录及每次提交所修改文件
+
 
 git log --author=chenlei2015@yeah.net 查看某个人的代码commit记录,包括合并分支记录
+
+git show 486d189da20aa799323b8c65f621f7c3c35f1a12 preview.php 查看某次提交（486d189da20aa799323b8c65f621f7c3c35f1a12)；preview.php 文件修改过的内容
+
+git show 486d189da20aa799323b8c65f621f7c3c35f1a12 查看该次提交修改那些文件及各文件修改的具体内容
+
+
 
 
 更详细的历史查看记录 请参阅 http://www.cnblogs.com/liyuanhong/articles/6540083.html

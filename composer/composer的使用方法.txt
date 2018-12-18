@@ -64,11 +64,20 @@ a: >E:
 
 b: >cd software\xampp\htdocs\item\common 
 
-c: software\xampp\htdocs\item\common> composer require "yiisoft/yii2-imagine": "*" --prefer-dist  //使该的命令进行插件下载 此命令不会进行插件追踪
+c: software\xampp\htdocs\item\common> composer require "yiisoft/yii2-imagine": "*" --prefer-dist  //使该的命令进行插件下载 此命令不会进行插件追踪 
 
 kartik-v/yii2-widget-activeform: "@dev"
 composer require "kartik-v/yii2-widget-activeform": "@dev" --prefer-dist
 
 composer require "kartik-v/yii2-helpers": "dev-master" --prefer-dist
+
+
+说明：
+composer的create-project 和 require 两个命令都有 --prefer-dist 和--prefer-source 参数 这两个参数的区别如下
+
+--prefer-dist 会从github上下载.zip压缩包，并缓存到本地,下次再安装就会从本地加载,大大加速安装速度.但她没有保留.git文件夹,没有版本信息。适合基于这个package进行开发,不会进行源代码跟踪
+
+--prefer-source 会从github 上clone 源代码，不会在本地缓存。但她保留了.git文件夹，从而可以实现版本控制。适合用于修改源代码。
+
 
 

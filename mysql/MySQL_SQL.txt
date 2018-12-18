@@ -1,5 +1,3 @@
-
-
 //添加字段 默认放在最后
 
 alter TABLE shopnc_member add `center_refuse_text` varchar (200) NOT NULL COMMENT '服务中心拒绝原因';

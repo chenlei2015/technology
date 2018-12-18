@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# 定时分配订单跟进任务,每小时的整点进行执行
+getDir(){
+  local dir="${1}"
+  echo "$(cd -P "$(dirname "${dir}")" && pwd)"
+}
+
+access=$(getDir "$BASH_SOURCE")
+
+if [ ! -d "${access}/runtime/"  ]; then 
+
+mkdir ${access}/runtime
+
+fi
+
+
+if [ ! -f "${access}/runtime/auto-allot-order.log"  ]; then
+
+touch ${access}/runtime/auto-allot-order.log
+
+fi
+
+php -f "${access}/index.php" crm/allot-order >> "${access}/runtime/auto-allot-order.log"
