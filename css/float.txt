@@ -1,0 +1,5 @@
+浮动理解
+1.任何标签元素加上float css 属性后都会变成inline-block
+2.任何未定义宽度标签元素加上float css 属性后 会尽量包裹它的内容， 没加float css属性时，宽度是其父元素的100%
+3.任何标签元素加上float css 属性后 其未定义高度的父元素都会失去高度 高度变成0；没加float css属性时，其未定义高度的父元素的实际高度是被它撑大的高度
+4.标签元素加上float css 属性 可以在其后添加一标签元素 例如<div style="clear:both"></div>
