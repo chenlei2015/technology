@@ -64,11 +64,11 @@ SELECT DISTINCT buyer_id FROM shopnc_order;
 
 SELECT VERSION( )
 
-	
+//反模糊查询
 
 
 
-
+	select * from area where '深圳市' like  %city_name%;
 
 
 
