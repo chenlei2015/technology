@@ -14,6 +14,10 @@ alter TABLE shopnc_voucher modify voucher_store_id int(11) NOT NULL DEFAULT '0' 
 
 update shopnc_member set register_method =3 where member_passwd='' and register_method=0;
 
+//删除
+
+delete from link_admin where lastlogin_time <= UNIX_TIMESTAMP('2019-04-26 00:00:00');
+
 //更新数据加子查询
 
 update shopnc_member set wechat_bind='Y' where member_id in (select member_id from shopnc_member_maping_wechat where member_id is not null);
@@ -54,7 +58,7 @@ SELECT * from shopnc_member where member_time > UNIX_TIMESTAMP('2017-11-11 11:11
 
 //将UNIX时间戳的时间转换为普通格式的时间 FROM_UNIXTIME(member_time)
 
-SELECT SELECT FROM_UNIXTIME(member_time) from shopnc_member where member_time > UNIX_TIMESTAMP('2017-11-11 11:11:11');
+SELECT FROM_UNIXTIME(member_time) from shopnc_member where member_time > UNIX_TIMESTAMP('2017-11-11 11:11:11');
 
 //去除重复的buyer_id
 
@@ -65,14 +69,29 @@ SELECT DISTINCT buyer_id FROM shopnc_order;
 SELECT VERSION( )
 
 //反模糊查询
+select * from area where '深圳市' like  %city_name%;
+
+
+//数据库用户授权只读
+create user 'readOnly'@'%' identified by 'yzzb2019PWD'; //创建用户readOnly
+grant select on *.*  to 'readOnly'@'%';  //授予该用户只读权限
+flush privileges;  //刷新权限
+delete from mysql.user where User='readOnly'; //删除该用户
+
+
+create user 'yzcl_dev_user'@'%' identified by 'yzcl_dev_db_PWD9.'; //创建用户yzcl_dev_user
+grant all on *.*  to 'yzcl_dev_user'@'%';//授予该用户所有权限
+flush privileges; 
 
 
 
-	select * from area where '深圳市' like  %city_name%;
 
 
 
+grant all privileges on *.* to 'root'@'%' identified by '.';
 
+
+flush privileges;
 
 
 

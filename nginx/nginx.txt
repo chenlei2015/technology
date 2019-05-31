@@ -1,0 +1,35 @@
+server {
+	listen       80;  //监听端口
+	server_name  www.newer.com; //域名
+	index index.php index.html; //网站入口文件
+	root    "D:/software/phpstudy/PHPTutorial/WWW/win2stock/public"; //网站入口文件所在目录
+	
+	//隐藏网站入口文件的配置
+	location / {
+		if ( !-e $request_filename ) {
+			rewrite ^(.*)$  index.php/$1 last;
+			break;
+		}
+	}
+
+	//配置php的fast-cgi模块
+	location ~ \.php(.*)$  {
+		fastcgi_pass   127.0.0.1:9000;
+		fastcgi_index  index.php;
+		fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;
+		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+		fastcgi_param  PATH_INFO  $fastcgi_path_info;
+		fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;
+		include        fastcgi_params;
+	}
+	
+	# redirect server error pages to the static page /50x.html
+	error_page   500 502 503 504  /50x.html;
+	location = /50x.html {
+		root   html;
+	}
+	
+	access_log  /www/wwwlogs/xl.dazyun.cn.log;
+    error_log  /www/wwwlogs/xl.dazyun.cn.error.log;
+	
+}
