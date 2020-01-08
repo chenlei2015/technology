@@ -1,0 +1,103 @@
+CREATE TABLE `award` (
+   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+   `aty_id` varchar(100) NOT NULL DEFAULT '' COMMENT '活动场景id',
+   `nickname` varchar(12) NOT NULL DEFAULT '' COMMENT '用户昵称',
+   `is_awarded` tinyint(1) NOT NULL DEFAULT 0 COMMENT '用户是否领奖',
+   `award_time` int(11) NOT NULL DEFAULT 0 COMMENT '领奖时间',
+   `account` varchar(12) NOT NULL DEFAULT '' COMMENT '帐号',
+   `password` char(32) NOT NULL DEFAULT '' COMMENT '密码',
+   `message` varchar(255) NOT NULL DEFAULT '' COMMENT '获奖信息',
+   `created_time` int(11) NOT NULL DEFAULT 0 COMMENT '创建时间',
+   `updated_time` int(11) NOT NULL DEFAULT 0 COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='获奖信息表';
+
+
+1.添加普通索引
+
+CREATE [INDEX|KEY] 索引名称 ON 表名(创建索引的字段）
+
+例如：CREATE INDEX account_Index ON award (account) 或 CREATE KEY account_Index ON award (account) 或 ALTER TABLE award ADD INDEX account_Index (account)
+
+
+2.添加唯一索引
+
+CREATE UNIQUE [INDEX|KEY]  索引名称 ON 表名(创建索引的字段）
+
+例如：CREATE UNIQUE INDEX account_UNIQUE_Index ON award (`account`) 或 CREATE UNIQUE KEY account_UNIQUE_Index ON award (account) 或 ALTER TABLE award ADD UNIQUE INDEX account_Index (account)
+
+
+3.添加全文索引 （对text类型的字段添加此索引）
+
+ALTER TABLE tablename ADD FULLTEXT (column1)
+
+
+4.添加主键索引
+
+ALTER TABLE table_name ADD PRIMARY KEY (column1)
+
+
+5.添加联合索引（复合索引 最左原则）
+
+
+CREATE UNIQUE INDEX nickname_account_UNIQUE_Index ON award (nickname,account)
+
+6.删除索引
+
+DORP INDEX IndexName ON `TableName`;
+
+
+适合创建建索引的情况如下：
+
+（1）主键，unique字段；
+
+（2）和其他表做连接的字段需要加索引；
+
+（3）在where里使用＞，≥，＝，＜，≤，is null和between等字段；
+
+（4）使用不以通配符开始的like，where A like 'China%'；
+
+（5）聚集函数MIN()，MAX()中的字段；
+
+（6）order by和group by字段；
+
+
+
+不适合创建建索引的情况如下：
+
+（1）表记录太少；
+
+（2）数据重复且分布平均的字段（只有很少数据值的列）；
+
+（3）经常插入、删除、修改的表要减少索引；
+
+（4）text，image等类型不应该建立索引，这些列的数据量大（假如text前10个字符唯一，也可以对text前10个字符建立索引）；
+
+（5）MySQL能估计出全表扫描比使用索引更快时，不使用索引；
+
+
+
+查询是索引失效的情况如下：
+
+1.查询条件里的字段在复合索引所包含的字段当中时; 应遵循最左原则 否则复合索引失效
+
+2.mysql使用不等于(!= 或者<>)的时候，无法使用索引，会导致索引失效
+
+3.在查询条件里的字段上做（计算，函数,自动或手动的数据类型装换）等操作，会导致索引失效
+
+4.mysql中使用is not null 或者 is null会导致无法使用索引
+
+5.查询条件里的字段like查询是以%开头，索引会失效
+
+6.or会使索引失效。如果查询字段相同，也可以使用索引。例如where A=a1 or A=a2（生效），where A=a or B=b（失效）
+
+
+
+
+
+
+
+
+
+
+

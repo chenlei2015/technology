@@ -1,0 +1,46 @@
+1.python3.7 安装easyui 
+
+ 1.1 cmd 切换到该目录下 D:\User\Desktop\python\2016 First Updates\robertlugg-easygui-cbd30b0\easygui
+
+ 1.2  执行该命令 D:\Program\Python37\python.exe setup.py install  即可安装 easyui
+ 
+ 
+ 1.配件不良 2.订单错误 3.功能不良 4.包装不良 5.资料错误 6.标签错误 7.外观不良 8.结构不良 9.交期异常 10.配合异常
+ 
+ 1:开发部2:品控部3:文案部4:设计部5:采购必6:技术部7:物流部8:供应商
+ 
+ 
+ CREATE TABLE `yibai_prod_po_sku_appendix` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `sku` varchar(100) NOT NULL DEFAULT '',
+  `dev_imgs` text NOT NULL COMMENT '附件图片路径',
+  `dev_imgs_tmp` text NOT NULL COMMENT '附件图本地路劲',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modify_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `create_user` varchar(20) NOT NULL DEFAULT '' COMMENT '创建人',
+  `modify_user` varchar(20) NOT NULL DEFAULT '' COMMENT '修改人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `udx_sku` (`sku`) USING BTREE,
+  KEY `idx_create_user` (`create_user`),
+  KEY `idx_modify_user` (`modify_user`),
+  KEY `idx_create_time` (`create_time`) USING BTREE,
+  KEY `idx_modify_time` (`modify_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2604 DEFAULT CHARSET=utf8 COMMENT='验货单相关sku附件表';
+
+
+
+CREATE TABLE `yibai_prod_operate_log` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `opreate_obj` varchar(100) NOT NULL DEFAULT '' COMMENT '操作对象代码',
+  'operate_type' tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '操作维度 1：验货单号 2：spu  3：sku',
+  `operate_name` varchar(50) NOT NULL DEFAULT '' COMMENT '操作人姓名',
+  `operate_code` varchar(20) NOT NULL DEFAULT '' COMMENT '操作人工号',
+  `operate_content` varchar(500) NOT NULL DEFAULT '' COMMENT '操作内容',
+  `operate_time` datetime DEFAULT '0000-00-00 00:00:00' COMMENT '操作时间',
+  PRIMARY KEY (`id`),
+  KEY `spu` (`spu`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=394 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+
+
+
+

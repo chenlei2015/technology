@@ -8,7 +8,7 @@ alter TABLE shopnc_member add `center_refuse_text`  varchar (200) NOT NULL COMME
 
 //修改字段属性
 
-alter TABLE shopnc_voucher modify voucher_store_id int(11) NOT NULL DEFAULT '0' COMMENT '可以使用此代金券的店铺id' AFTER voucher_limit ;
+alter TABLE shopnc_voucher modify voucher_store_id int(11) NOT NULL DEFAULT '0' COMMENT '可以使用此代金券的店铺id' AFTER voucher_limit;
 
 //更新
 
@@ -25,6 +25,10 @@ update shopnc_member set wechat_bind='Y' where member_id in (select member_id fr
 //给表加注释
 
 ALTER TABLE shopnc_order COMMENT='这是订单表';
+
+//修改表名
+
+rename table yibai_prod_po_shipping_Info to yibai_prod_po_shipping_info;
 
 //删除表字段
 
@@ -70,6 +74,11 @@ SELECT VERSION( )
 
 //反模糊查询
 select * from area where '深圳市' like  %city_name%;
+
+select sku,product_status from yibai_product where sku like '%GY01341%';
+
+//连接查询
+select * from yibai_prod_spu p LEFT JOIN yibai_prod_sku s  on p.spu = s.spu where p.spu = "101019HS375";
 
 
 //数据库用户授权只读

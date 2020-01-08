@@ -1,0 +1,12 @@
+d: 
+ 
+cd code\phpstudy\PHPTutorial\WWW\blog
+
+php artisan make:controller UserController 
+
+php artisan admin:make UserController --model=App\models\wish\user
+
+php artisan make:model  Modelswish/GoodsCommon
+
+
+

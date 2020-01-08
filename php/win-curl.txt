@@ -1,0 +1,10 @@
+1. curl post方式提交数据
+
+curl -d {"sku_id":24981} -H "Content-Type: application/json" -X POST http://192.168.71.170:90/sale_product/sku_shield/log  //数据以json格式提交
+
+curl -d "sku_id=24981&user_id=56211" -X POST http://192.168.71.170:90/sale_product/sku_shield/log                          //数据以字符创方式提交
+
+
+2. curl get方式提交数据 
+
+curl http://192.168.71.170:90/sale_product/sku_shield/log?sku_id=24981&user_id=56211
