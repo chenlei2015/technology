@@ -1,0 +1,22 @@
+1.查询进程 
+
+dos： tasklist | findstr "进程名";
+
+linux: ps -aux | grep "进程名";
+
+
+2.强行杀死某进程 
+
+dos: taskkill /pid 进程ID -t -f, 例如：taskkill /pid 4859 -t -f;       taskkill /f /t /im 进程名,    例如： taskkill /f /t /im java.exe；
+
+linux: kill -9 进程ID  例如： kill -9 4859；
+
+
+3.查看指定端口的占用情况
+
+dos:  netstat -aon | findstr "8080"
+
+linux：netstat -tnpl | grep  "8080"
+
+
+

@@ -1,0 +1,38 @@
+1.安装流程  https://www.swoft.org/documents/v2/quick-start/install/  和  https://blog.csdn.net/weikaixxxxxx/article/details/84454405
+
+2.安装composer  https://blog.csdn.net/yan_dk/article/details/90228559
+
+3.安装PHP的redis扩展  https://www.cnblogs.com/jxl1996/p/10187989.html
+
+4.安装PHP的hiRedis扩展   https://blog.csdn.net/Nep_tune/article/details/81504193
+
+5.安装php的swoole扩展 https://wiki.swoole.com/wiki/page/6.html
+
+6.安装 Swoft CLI 工具 https://www.swoft.org/documents/v2/dev-tools/swoft-cli/index.html
+
+//本地启动
+swoftcli run -c http:start -b bin/swoft  //启动swoft的http服务
+
+
+//创建的表实体 database 为数据库名称  table_name为表名（如果数据库配置配置了表前缀  就是去除表前缀的表名称） 
+//生成数据实体
+ 
+php bin/swoft entity:create -d database table_name
+php bin/swoft entity:create -d yb_tms_logistics_track_info order
+
+
+
+//生成http    控制器
+swoftcli gen:http-ctrl Alarm --prefix /Alarm --preview
+
+
+
+//生成中间件 
+swoftcli gen:http-mdl Alarm
+
+
+//生成 tcp-controller
+swoftcli gen:tcp-ctrl Alarm --prefix /Alarm --preview
+
+
+

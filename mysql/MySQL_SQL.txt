@@ -6,9 +6,15 @@ alter TABLE shopnc_member add `center_refuse_text` varchar (200) NOT NULL COMMEN
 
 alter TABLE shopnc_member add `center_refuse_text`  varchar (200) NOT NULL COMMENT '服务中心拒绝原因' AFTER is_service_center;
 
+alter TABLE yibai_oversea_global_rule_cfg add `support_platform` varchar(500) NOT NULL DEFAULT '' COMMENT '支持平台' AFTER station_code;
+
+ALTER  TABLE  yibai_plan_stock .yibai_inland_rebuild_mvcc  ADD  is_crontab  tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否定时任务生成：0，否;1，是' AFTER moq_purchase_money;
+
+
 //修改字段属性
 
 alter TABLE shopnc_voucher modify voucher_store_id int(11) NOT NULL DEFAULT '0' COMMENT '可以使用此代金券的店铺id' AFTER voucher_limit;
+
 
 //更新
 
@@ -30,6 +36,8 @@ ALTER TABLE shopnc_order COMMENT='这是订单表';
 
 rename table yibai_prod_po_shipping_Info to yibai_prod_po_shipping_info;
 
+alter table yibai_purchase_pr_quantity_14 rename to yibai_purchase_pr_quantity_17;
+
 //删除表字段
 
 alter table `dfs_member` drop center_refuse_text;
@@ -37,6 +45,12 @@ alter table `dfs_member` drop center_refuse_text;
 //查询表结构
 
 desc shopnc_member
+
+//sql包含变量
+
+set @index = -1;
+
+select * FROM yibai_inland_pr_list where gid >= 20010904333800000000 and gid <= 200109043338000000100 and ((@INDEX := @INDEX + 1) > -1) and (@INDEX % 10 = 0);
 
 //创建表
 
@@ -88,7 +102,7 @@ flush privileges;  //刷新权限
 delete from mysql.user where User='readOnly'; //删除该用户
 
 
-create user 'yzcl_dev_user'@'%' identified by 'yzcl_dev_db_PWD9.'; //创建用户yzcl_dev_user
+create user 'yzcl_dev_user'@'%' identified by 'yzcl_dev_db_PWD9'; //创建用户yzcl_dev_user
 grant all on *.*  to 'yzcl_dev_user'@'%';//授予该用户所有权限
 flush privileges; 
 
@@ -101,6 +115,9 @@ grant all privileges on *.* to 'root'@'%' identified by '.';
 
 
 flush privileges;
+
+
+
 
 
 

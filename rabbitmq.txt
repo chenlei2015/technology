@@ -1,0 +1,11 @@
+服务安装位置
+C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.3\sbin
+服务启动命令
+
+C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.3\sbin\rabbitmq-plugins.bat enable rabbitmq_management
+
+安装完成之后以管理员身份启动 rabbitmq：输入命令：
+注：一定是要以管理员○身份启动，否则会报错
+　　rabbitmq-service.bat stop
+　　rabbitmq-service.bat install
+　　rabbitmq-service.bat start

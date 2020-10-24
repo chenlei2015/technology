@@ -1,0 +1,67 @@
+操作定时任务的命令及说明
+
+定时任务分为两类：用户维度的定时任务 和 系统维度的定时任务
+
+
+
+//用户维度的定时任务操作  假设当前登录用户为www用户 
+crontab -e 编辑当前用户的所有定时任务  相当于  vim /var/spool/cron/www
+
+crontab -l 查看当前用户的所有定时任务  相当于  less /var/spool/cron/www
+
+/var/spool/cron/ 所有用户的定时任务所在文件夹
+
+//举例
+30 2 * * * /usr/bin/php /mnt/yibai_cloud/plan/appdal/index.php crontab Commmon delete_rebuild_invalid_cfg  // 2:30执行
+
+1,3,5,7,9 * * * * php index.php  tracksys console Trajectory inQueue // 第1，第3 第5，第7 第9分钟执行
+
+
+
+//系统维度的定时任务
+/etc/crontab    所有系统的定时任务所在文件
+
+less /etc/crontab | grep "crontab Commmon delete_rebuild_invalid_cfg"   查找具体定时任务
+
+//举例  系统定时任务 比 用户维度的定时任务 多一个user指定www  系统定时任务中可以直接给其他用户设置计划任务
+30 2 * * * www /usr/bin/php /mnt/yibai_cloud/plan/appdal/index.php crontab Commmon delete_rebuild_invalid_cfg
+
+
+
+
+
+
+定时任务相关文件
+
+/var/log/cron             定时任务的日志文件  运行过程的一个记录
+
+/var/spool/cron/          每个用户的定时文件
+
+/etc/cron.deny           那些用户禁止使用定时任务-定时任务黑名单
+
+
+
+
+
+
+
+定时任务 执行时间规则总结：
+
+代替*的写法有6种 分别如下：
+
+第1种： *   （每一分，每一天 ） 例如 ： * * * * * myCommand   //每1分钟执行一次myCommand
+
+第2种： 30  （固定值 ）        例如 ： 30 21 * * * /etc/init.d/smb restart  //每晚的21:30重启smb
+
+第3种： */2  (每几)            例如 ： * */1 * * * /etc/init.d/smb restart  //每2小时重启smb
+
+第4种： 8-11 (范围)           例如 ： 3,15 8-11 * * * myCommand  //在上午8点到11点的第3和第15分钟执行
+
+第5种： 3,15 (范围)           例如 ： 3,15 * * * * myCommand    // 每小时的第3和第15分钟执行
+
+第6种： 23-7/1 (范围)         例如 ： * 23-7/1 * * * /etc/init.d/smb restart  // 晚上11点到早上7点之间，每隔一小时重启smb
+
+
+示例：
+
+*/10 16-23,0-12 * * *   //每天的16点至23点 0点至12点 每10分钟执行一次

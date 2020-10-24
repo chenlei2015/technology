@@ -1,0 +1,41 @@
+﻿AB在APACHE的bin目录下，以命令行的方式执行：
+
+格式： ./ab [options] [http://]hostname[:port]/path
+
+参数说明：
+
+-n requests     //在测试会话中所执行的请求个数。默认时，仅执行一个请求
+
+-c concurrency  //一次产生的请求个数。默认是一次一个
+
+t timelimit     //测试所进行的最大秒数
+
+
+
+其他的参数看中就用。
+
+参数很多,一般我们用 -c 和 -n 参数就可以了. 例如:
+
+./ab -c10 -n10 http://192.168.71.141:92/ordersys/console/ShipCost/getCost?model=WYT_model
+
+./ab -c1000 -n10000 http://127.0.0.1/index.jsp
+
+这个c表示同时处理1000个并发请求，n表示运行10000请求次index.jsp文件.
+
+其返回的结果集是有很多内容，我们选择关键的几个看看就大概知道我们的模块性能了
+
+我比较关心的几个结果：
+
+Concurrency Level: 1000
+Time taken for tests: 1.190 seconds //处理1000个并发请求总共花了1.19秒
+Complete requests: 1000 //完成处理的请求量
+Failed requests: 0 //请求失败数
+Write errors: 0
+Non-2xx responses: 1000
+Total transferred: 164000 bytes //总共传输了多少流量
+HTML transferred: 0 bytes
+Requests per second: 840.58 [#/sec] (mean) //平均一个请求花840.58毫秒 大家最关心的指标之一，相当于 LR 中的每秒事务数，后面括号中的 mean 表示这是一个平均值
+Time per request: 1189.651 [ms] (mean) //大家最关心的指标之二，相当于 LR 中的平均事务响应时间，后面括号中的 mean 表示这是一个平均值
+Time per request: 1.190 [ms] (mean, across all concurrent requests) //每个请求实际运行时间的平均值 ms是毫秒
+Transfer rate: 134.62 [Kbytes/sec] received //传输速率 可以帮助排除是否存在网络流量过大导致响应时间延长的问题
+

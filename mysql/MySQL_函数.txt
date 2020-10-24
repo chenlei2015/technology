@@ -1,0 +1,14 @@
+//md5
+update yibai_outstock_pack_box set gid = md5(concat(trim(order_id),trim(pack_no)))
+
+//length
+select length("  sss ddd  ");
+
+//trim
+select length(trim("  sss ddd  "));
+
+//find_in_set
+
+
+//if()
+

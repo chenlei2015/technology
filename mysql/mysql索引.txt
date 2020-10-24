@@ -42,9 +42,15 @@ ALTER TABLE table_name ADD PRIMARY KEY (column1)
 
 CREATE UNIQUE INDEX nickname_account_UNIQUE_Index ON award (nickname,account)
 
+CREATE UNIQUE INDEX staff_account_unique_index ON `yibai_plan_stock`.`yibai_fba_manager_account` (staff_code,account_name);
+
 6.删除索引
 
-DORP INDEX IndexName ON `TableName`;
+ALTER TABLE `yibai_plan_stock`.`yibai_fba_manager_account` DORP INDEX unq_account_name;
+
+DORP INDEX unq_account_name ON `yibai_plan_stock`.`yibai_fba_manager_account`;
+
+
 
 
 适合创建建索引的情况如下：
@@ -74,6 +80,8 @@ DORP INDEX IndexName ON `TableName`;
 （4）text，image等类型不应该建立索引，这些列的数据量大（假如text前10个字符唯一，也可以对text前10个字符建立索引）；
 
 （5）MySQL能估计出全表扫描比使用索引更快时，不使用索引；
+
+ (6) 时间类型的字段 如果数据类型为int不建议加索引 如果字段类型为datetime类型建议加索引
 
 
 

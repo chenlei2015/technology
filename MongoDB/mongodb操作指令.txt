@@ -1,0 +1,52 @@
+打开cmd窗口 进行MongoDB服务启动:
+D:/code/mongodb-win32-x86_64-2008plus-ssl-4.0.9/bin/mongod.exe --dbpath D:/code/mongodb-win32-x86_64-2008plus-ssl-4.0.9/data/db
+
+
+show  dbs  // 显示已存在的数据库
+
+use db_name // 创建或切换数据库
+
+db.cole.insert({name:'zhangshan'}) // 在当前数据库中创建集合cole的同时 并向该集合中插入一条文档
+
+db.cole.remove({}) //在当前数据库中集合cole里的所有数据
+
+
+tms系统排查错误后端
+db.getCollection('yibai_tms_system_appdal_error_log_202005').find({}).sort({created_time:-1}) //倒叙查询所有记录
+
+
+//tms系统排查错误前端  模糊查询("/正则表达式/")  注意转义字符  字段route包含"ordersys/api"的所有记录
+db.getCollection('yibai_tms_system_appdal_error_log_202005').find({route:/ordersys\/api/}).sort({created_time:-1})
+
+
+//tms系统排查错误前端  模糊查询("/正则表达式/")  注意转义字符  字段route包含"ordersys/api"的所有记录 并且只查询 message、route 、created_time 字段
+db.getCollection('yibai_tms_system_appdal_error_log_202005').find({route:/ProductLogisticsAudits/},{message:1, route:1, created_time:1}).sort({created_time:-1})
+
+
+
+
+tms系统排查错误前端
+db.getCollection('yibai_tms_system_webfront_error_log_202005').find({}).sort({created_time:-1}) //倒叙查询所有记录
+
+//tms系统排查错误前端  模糊查询("/正则表达式/")  注意转义字符  字段route包含"ordersys/api"的所有记录
+db.getCollection('yibai_tms_system_webfront_error_log_202006').find({route:/ordersys\/api/}).sort({created_time:-1})
+
+//tms系统排查错误前端  模糊查询("/正则表达式/")  注意转义字符  字段route包含"ordersys/api"的所有记录 并且只查询 message、route 、created_time 字段
+db.getCollection('yibai_tms_system_webfront_error_log_202006').find({route:/ProductLogisticsAudits/},{message:1, route:1, created_time:1}).sort({created_time:-1})
+
+
+//tms系统sql排查错误
+
+db.getCollection('yibai_curd_error_log').find({"table_name":"yibai_user"}).limit(50).sort({created_time:-1})
+
+
+
+
+use yb_tms //选择数据库
+
+//查询集合中的记录
+db.getCollection("yibai_get_tracknum_postdata_and_result_log").find(
+    { 
+        "order_id" : "EB200421007222"
+    }
+);

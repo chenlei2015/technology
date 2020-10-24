@@ -1,7 +1,0 @@
-show  dbs  // 显示已存在的数据库
-
-use db_name // 创建或切换数据库
-
-db.cole.insert({name:'zhangshan'}) // 在当前数据库中创建集合cole的同时 并向该集合中插入一条文档
-
-db.cole.remove({}) //在当前数据库中集合cole里的所有数据

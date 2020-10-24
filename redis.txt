@@ -1,0 +1,27 @@
+打开cmd窗口 启动redis服务端
+D:\code\Redis-x64-3.0.504\redis-server.exe redis.windows.conf
+
+
+
+打开cmd窗口 启动redis客户端
+D:\code\Redis-x64-3.0.504\redis-cli.exe -h 127.0.0.1 -p 6379
+
+//需要密码的情况下
+auth 123456（密码）
+
+开发环境 启动redis客户端 
+
+D:\code\Redis-x64-3.0.504\redis-cli.exe -h 192.168.71.141 -p 7001
+
+auth yis@2019._ 
+
+
+redis的说明：因为Redis是单线程的，所以假设A和B同时去Redis中加锁，必然有先后顺序 即使在高并发下 也不会出现A与B同时加锁成功的情况。
+
+也就是说在不同客户端或不同的多个进程连接redis， 操作同一个key时，必然有先后顺序,不可能同时设置值，也不可能同时获取该键的值，必然
+
+是按顺序执行的,不能同一时刻时执行，redis本身也没有锁的概念
+
+
+
+1.缓存雪崩
