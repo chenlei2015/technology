@@ -1,0 +1,69 @@
+﻿1. netstat 网络监控工具
+
+说明：显示各种网络相关信息 
+
+举例：
+
+1.1  netstat -lpn | grep -E "php|nginx|mysql"  //可以查看全部你已经打开的端口、PID、程序名
+
+1.2  netstat -lpnt  // 查看tcp网络连接
+
+1.2  netstat -lpnu  // 查看udp网络连接
+
+1.2  netstat -lpnx  // 查看socket网络连接
+
+
+
+2.Linux查看物理CPU个数、核数、逻辑CPU个数
+
+说明： 总核数 = 物理CPU个数 X 每颗物理CPU的核数 
+       总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数
+
+2.1 查看物理CPU个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+
+2.2 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+
+2.3 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
+
+2.4 查看CPU信息（型号）
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
+
+2.5 查看内 存信息
+cat /proc/meminfo
+
+
+
+3. top 命令可以动态地持续监听进程地运行状态
+
+说明：按q键退出；按大写M键以占用内存大小排序;  按大写P键根据CPU使用百分比大小进行排序。按大写T键根据时间/累计时间进行排序。
+
+3.1 top -d1 -p 27585  命令查看某个进程  -d1：表示每隔1秒刷新一下数据
+
+3.2 top -b -n 1 > /root/top.log   top命令只执行一次，然后把执行结果保存到top.log文件中，这样就能看到所有的进程了
+
+
+
+4. free 查看内存使用情况
+
+4.1 free -m  以 MB 为单位，显示内存使用情况
+
+
+
+5 htop 是一个跨平台交互式进程查看器，相比系统top命令界面更直观 但需要自己安装
+
+说明：安装前必须先安装下面这两个依赖 
+
+      yum install ncurses-libs
+
+      yum install ncurses-devel
+
+5.1 源码下载地址：https://github.com/htop-dev/htop/tree/master
+
+5.2 源码安装成功后 设置全局执行命令  ln -s /usr/local/htop/bin/htop  /usr/bin/htop
+
+
+
+

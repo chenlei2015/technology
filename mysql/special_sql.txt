@@ -1,0 +1,86 @@
+//1 字段使用 case when
+SELECT
+CASE	
+	WHEN type = 1 THEN
+	'说明书' 
+	WHEN type = 2 THEN
+	'操作视频' 
+	WHEN type = 3 THEN
+	'授权证书' 
+	WHEN type = 4 THEN
+	'安装驱动' 
+	WHEN type = 5 THEN
+	'调研文件' 
+	WHEN type = 6 THEN
+	'授权文件' 
+	WHEN type = 7 THEN
+	'验货附件' ELSE NULL 
+	END AS 'appendix_name',
+FROM
+	yibai_prod_sku_link 
+WHERE
+	sku = 'jm78452'
+	
+	
+	
+	
+	
+	
+//2 子查询及 if 函数及 find_in_set 函数	
+select sku,apply from (
+	SELECT
+			sku,
+			count(sku) as num, 
+			GROUP_CONCAT(audit_attr_status) as apply
+		FROM
+			yibai_prod_logistics_audit_attr 
+		WHERE
+			#is_to_audit_attribute_table = 1 
+			is_to_audit_attribute_table = 0 
+			and country_code in (
+			'DE', 
+			'CZ',
+			'PL',
+			'ES', 
+			'IT', 
+			'GB', 
+			'FR',
+			'AE'
+			)
+		GROUP BY
+			sku
+		having num > 1
+) t1 
+where (if(FIND_IN_SET('1',apply),true,false) and if(FIND_IN_SET('2',apply),true,false))
+
+
+
+
+
+//3 sql中设置变量 切分数据
+set @index = -1;
+#set @rid = 0; 
+SELECT
+	id,
+	#(@rid := @rid + 1)	as rid
+FROM
+	yibai_hwc_cost_pull_task 
+WHERE
+	business_type = "EC" 
+	and ((@INDEX := @INDEX + 1) > - 1 ) AND (@INDEX % 5 = 0);
+
+select * FROM  yibai_hwc_cost_pull_task WHERE id >= 2 and business_type = "EC" limit 5;
+
+
+
+
+
+#4 批量更新
+UPDATE `mytable` SET 
+#字段name
+`name` = CASE  WHEN `title` = 'My title' THEN 'My Name 2' WHEN `title` = 'Another title' THEN 'Another Name 2'  ELSE `name` END,
+#字段date
+`date` = CASE  WHEN `title` = 'My title' THEN 'My date 2' WHEN `title` = 'Another title' THEN 'Another date 2'  ELSE `date` END
+#更新范围
+WHERE `title` IN ('My title','Another title')
+	

@@ -32,17 +32,22 @@ chmod 改变文件可读可写可执行的权限
 
 例：chmod  743 = chmod u+rwx g+r o+wx
 
+
+
 chown 改变文件的所有者 
 
 例：chown lei 1.txt (把1.txt的所属者改为lei)
     
     chown lei:lei 1.txt (把1.txt的所属者及所属组都改为lei)
 
+
 chgrp 改变文件的所属组
 
-例：chown lei 1.txt (把1.txt的所属组改为lei)
+例：chgrp lei 1.txt (把1.txt的所属组改为lei)
 
 chmod chown chgrp 都加 -R选项 表示递归的改变
+
+
 
 umask 可以指定哪些权限将在新建文件的默认权限中被删除
 
@@ -51,11 +56,15 @@ umask 可以指定哪些权限将在新建文件的默认权限中被删除
 
 umask -S 与 umask的作用相反 
 
+
+
 文件的隐藏属性
 
 chattr 用于设置文件（不包含目录）的隐藏权限 格式 chattr [选项] [文件作为参数]
 
 例：chattr +a /chattr -a 1.php
+
+
 
 lsattr 用于显示文件（不包含目录）的隐藏权限 格式 lsattr [选项] [文件作为参数]
 
@@ -63,6 +72,8 @@ lsattr 用于显示文件（不包含目录）的隐藏权限 格式 lsattr [选项] [文件作为参数]
 SUID  chmod u+s  只针对二进制的命令文件 使一般用户拥有该二进制命令文件所有者的权限执行该命令
 SGID  chmod g+s  针对二进制的命令文件时 使一般用户拥有该二进制命令文件所有组的权限执行该命令；针对目录时 在该目录下创建的文件或子目录继承该目录的所属组；
 SBIT  chmod o+t  只针对目录 在该目录下创建的文件或子目录 只有自己可以删除，其他人不可以删除；
+
+
 
 file 查看文件属性
 

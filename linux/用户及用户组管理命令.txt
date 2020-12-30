@@ -1,0 +1,57 @@
+﻿//用户及用户组的储存文件
+
+1. /etc/passwd 文件，是系统用户配置文件，存储了系统中所有用户的基本信息
+
+2. /etc/shadow 文件，用于存储 Linux 系统中用户的密码信息，又称为“影子文件”
+
+3. /ect/group 文件是用户组配置文件，即用户组的所有信息都存放在此文件中
+
+4. /etc/gshadow，用户组的密码信息存储在该文件中
+
+
+
+
+//用户账号相关命令
+
+1.useradd 添加用戶
+1.1  useradd test                  添加登录用户test
+1.2  useradd www -s /sbin/nologin  添加禁止登录用户www
+
+2.userdel  删除用户
+2.1  userdel -r    同时删除用户及用户家目录
+2.2  userdel -f    强制删除用户
+
+3.usermod  用于修改用户的属性
+3.1  usermod -G root www  将用户www加入到root用户组中，这样扩展组列表中则会出现root用户组的字样，而基本组不会受到影响 使用这个命令只能让www只有root这一个扩展组 其他的扩展组被清除
+3.2  usermod -g root www  将用户www基本组变更为root组
+3.3  usermod -L	test      锁定用户禁止其登录系统
+3.4  usermod -U	          解锁用户，允许其登录系统
+3.5  usermod -e	          设置账户的到期时间
+
+4 passwd 用于修改当前用户的密码
+
+5 id 查询用户信息
+5.1 id www  查询用户www的账号信息
+
+
+
+
+//用户组相关命令
+
+1. groupadd 添加用戶组
+1.1  groupadd  lnmp  添加用戶组lnmp
+
+
+2. groupdel 删除用户组
+2.1groupdel  lnmp    删除用户组lnmp
+
+
+3 gpasswd 管理用户组
+
+3.1  gpasswd -a www	lnmp   将 www 用户加入到用户组lnmp中   此命令能将www添加进多个扩展组 而不会清空其他的扩展组
+
+3.2  gpasswd -d www        将 www 用户从户组lnmp中删除
+
+3.3  gpasswd lnmp          为用户组lnmp设置密码
+
+3.4  gpasswd -A www lnmp   将www设置为lnmp用户组的管理员

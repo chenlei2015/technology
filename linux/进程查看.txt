@@ -1,0 +1,14 @@
+// 查看进程
+ps -aux | grep "进程名"
+
+
+//进程父子关系树
+ps -auxft | grep php-fpm
+
+
+//显示父子进程ID
+ps -ef | grep php-fpm
+
+
+//进程父子关系树
+pstree -p 进程ID

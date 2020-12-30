@@ -1,11 +1,16 @@
-d: 
+﻿d: 
  
 cd code\phpstudy\PHPTutorial\WWW\blog
 
+//创建控制器
 php artisan make:controller UserController 
 
+
+//创建控制器 并制定控器 依赖的model
 php artisan admin:make UserController --model=App\models\wish\user
 
+
+//创建数据实体
 php artisan make:model  Modelswish/GoodsCommon
 
 

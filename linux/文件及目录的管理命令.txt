@@ -59,7 +59,7 @@
 
 例如 rm -rf crm  当前目录位于/home/www/dfs168目录 强制删除当前目录下的crm目录及crm中的所有文件及目录(/home/www/dfs168/crm)
 
-4.mv （ 移动文件与目录，或更名）
+4.mv （ 移动文件与目录，或文件重命名）
 
 -i ：若目标文件 （ destination） 已经存在时，就会询问是否覆盖！
 
@@ -92,11 +92,25 @@ q ：离开 less 这个程序；
 
 6.head 只看头几行
 
-7.tail 只看尾巴几行
+7.tail -f  动态查看文件末尾几行
 
 8.od 以二进制的方式读取文件内容！
 
 9.strings 以字符串的形式读取文件；
+
+
+文件内容的搜索命令
+
+1. grep -n  content log.txt   显示行号及查找的内容content
+
+2. grep -vn  content log.txt  显示行号及不包含匹配文本的所有行(反向查找)
+
+3. grep content log.txt  显示查找的内容content
+
+3. find  /usr -name php.ini  查找文件php.ini位置
+
+
+
 
 修改文件时间或创建新文件
 1.touch （创建一个空的文件；将某个文件日期修订为目前 （ mtime 与 atime））
@@ -116,8 +130,10 @@ q ：离开 less 这个程序；
 3.locate：依据 /var/lib/mlocate 内的数据库记载，找出使用者输入的关键字文件名 如果你忘记某个文件的完整文件名时 使用此命令比较好
 4.updatedb：根据 /etc/updatedb.conf 的设置去搜寻系统硬盘内的文件名，并更新/var/lib/mlocate 内的数据库文件；
 
+
 5.  find [PATH] [option] [action]
 例子：find /home -name/size/user/uid  1.txt
+
 
 6. grep 关键词  文件名 (在对应的文件里搜素关键词)
 

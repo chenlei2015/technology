@@ -1,0 +1,94 @@
+﻿第一步：慢日志查询
+
+1.查看是否开启：      
+show variables like '%slow_query_log%';
+
+2.开启慢查询日志：
+set global slow_query_log=1; (重启会失效)
+
+3. 查看当前阀值命令：
+show variables like 'long_query_time%';
+
+4. 设置阀值命令：
+ set global long_query_time=3 （修改为阀值到3秒钟的就是慢sql;需要重新连接或新开一个会话才能看到修改值）
+ 
+5.查看慢查询日志：
+cat -n /data/mysql/mysql-slow.log
+
+6.查看有多少条慢查询记录： 
+show global status like '%Slow_queries%';
+
+
+第二步：慢日志查询分析工具mysqldumpslow的使用
+
+参数解释：
+-s, 是表示按照何种方式排序
+c: 访问计数
+l: 锁定时间
+r: 返回记录
+t: 查询时间
+al:平均锁定时间
+ar:平均返回记录数
+at:平均查询时间
+-t, 是top n的意思，即为返回前面多少条的数据；
+-g, 后边可以写一个正则匹配模式，大小写不敏感的；
+
+工作常用用法：
+
+得到返回记录集最多的10个SQL。
+mysqldumpslow -s r -t 10 /database/mysql/mysql06_slow.log
+
+得到访问次数最多的10个SQL
+mysqldumpslow -s c -t 10 /database/mysql/mysql06_slow.log
+
+得到按照时间排序的前10条里面含有左连接的查询语句。
+mysqldumpslow -s t -t 10 -g “left join” /database/mysql/mysql06_slow.log
+
+另外建议在使用这些命令时结合 | 和more 使用 ，否则有可能出现刷屏的情况。
+mysqldumpslow -s r -t 20 /mysqldata/mysql/mysql06-slow.log | more
+
+
+第三步：explain分析sql语句 
+
+1. 没有索引 则创建索引  参考 mysql索引.txt
+
+2. 有索引   而索引失效  分析失效原因  重新组织sql语句
+
+3.explain使用心法： 
+针对explain命令生成的执行计划，这里有一个查看心法。
+我们可以先从查询类型type列开始查看，如果出现all关键字，后面的内容就都可以不用看了，代表全表扫描。
+再看key列，看是否使用了索引,null代表没有使用索引。然后看rows列，该列用来表示在SQL执行过程中被扫描的行数，该数值越大，意味着需要扫描的行数越多，相应的耗时越长，
+最后看Extra列，在这列中要观察是否有Using filesort 或者Using temporary 这样的关键字出现，这些是很影响数据库性能的
+
+
+
+第四步：show profile：mysql提供可以用来分析当前会话中语句执行的资源消耗情况的工具。可以用于SQL的调优参考
+
+1.是否支持，看看当前的mysql版本是否支持
+Show  variables like 'profiling';
+
+
+2.开启功能，默认是关闭，使用前需要开启
+set profiling=on;
+
+
+3. 执行要分析的sql语句
+
+
+4.查看结果 
+show profile;
+
+
+5.诊断SQL
+show profile cpu,block io for query query_id
+
+
+
+
+
+
+
+
+
+
+

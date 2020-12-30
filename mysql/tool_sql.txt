@@ -1,0 +1,18 @@
+1.统计当前mysql各库信息
+
+SELECT
+    table_schema AS '数据库',
+    sum(table_rows) AS '记录数',
+    sum(
+        TRUNCATE (data_length / 1024 / 1024, 2)
+    ) AS '数据容量(MB)',
+    sum(
+        TRUNCATE (index_length / 1024 / 1024, 2)
+    ) AS '索引容量(MB)'
+FROM
+    information_schema. TABLES
+GROUP BY
+    table_schema
+ORDER BY
+    sum(data_length) DESC,
+    sum(index_length) DESC;

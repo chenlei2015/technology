@@ -6,7 +6,10 @@ alter TABLE shopnc_member add `center_refuse_text` varchar (200) NOT NULL COMMEN
 
 alter TABLE shopnc_member add `center_refuse_text`  varchar (200) NOT NULL COMMENT '服务中心拒绝原因' AFTER is_service_center;
 
+
 alter TABLE yibai_oversea_global_rule_cfg add `support_platform` varchar(500) NOT NULL DEFAULT '' COMMENT '支持平台' AFTER station_code;
+
+alter TABLE yibai_tms_logistics.yibai_platform_tracking_fba add `registrant` varchar(100) NOT NULL DEFAULT '' COMMENT '录入人' AFTER is_get;
 
 ALTER  TABLE  yibai_plan_stock .yibai_inland_rebuild_mvcc  ADD  is_crontab  tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否定时任务生成：0，否;1，是' AFTER moq_purchase_money;
 
@@ -87,7 +90,7 @@ SELECT DISTINCT buyer_id FROM shopnc_order;
 SELECT VERSION( )
 
 //反模糊查询
-select * from area where '深圳市' like  %city_name%;
+select * from area where '深圳市' like  %city_name%;  //使用深圳市匹配数据中的深圳记录
 
 select sku,product_status from yibai_product where sku like '%GY01341%';
 

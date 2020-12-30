@@ -63,6 +63,26 @@ lsb_release -a 查看linux版本信息
 环境变量 $PATH 是配置各命令的加家目录
 
 
+查看文件内容的命令：
+
+less  sp3.log    按q退出  
+
+less -N sp3.log  显示行号
+
+vim   编辑  
+
+tail -f  sp3.log 动态查看文件sp3.log的内容
+
+tail -10 sp3.log 查看文件sp3.log的后10行内容
+
+head -10 sp3.log 查看文件sp3.log的前10行内容
+
+cp 复制
+
+mv 移动或重命名
+
+
+
 
 
 

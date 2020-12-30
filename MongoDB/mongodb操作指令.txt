@@ -6,6 +6,16 @@ show  dbs  // 显示已存在的数据库
 
 use db_name // 创建或切换数据库
 
+db.getCollection("yibai_logistics_import_customs_elements_ruleV2_202009").createIndex({"sku":1}) //为字段sku创建升序索引  降序索引为 -1; 
+
+
+db.getCollection("yibai_order_order_get_tracking_log").getIndexes() // 查看为该集合的那些字段创建了索引
+
+
+db.getCollection("yibai_order_order_get_tracking_log").totalSize()  // 获取该集合的大小(数据大小+索引大小)  size/1024/1024 MB
+
+
+
 db.cole.insert({name:'zhangshan'}) // 在当前数据库中创建集合cole的同时 并向该集合中插入一条文档
 
 db.cole.remove({}) //在当前数据库中集合cole里的所有数据
@@ -21,7 +31,6 @@ db.getCollection('yibai_tms_system_appdal_error_log_202005').find({route:/orders
 
 //tms系统排查错误前端  模糊查询("/正则表达式/")  注意转义字符  字段route包含"ordersys/api"的所有记录 并且只查询 message、route 、created_time 字段
 db.getCollection('yibai_tms_system_appdal_error_log_202005').find({route:/ProductLogisticsAudits/},{message:1, route:1, created_time:1}).sort({created_time:-1})
-
 
 
 

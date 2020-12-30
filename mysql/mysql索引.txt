@@ -57,7 +57,7 @@ DORP INDEX unq_account_name ON `yibai_plan_stock`.`yibai_fba_manager_account`;
 
 （1）主键，unique字段；
 
-（2）和其他表做连接的字段需要加索引；
+（2）查询中与其它表关联的字段，外键关系建立索引
 
 （3）在where里使用＞，≥，＝，＜，≤，is null和between等字段；
 
@@ -66,6 +66,9 @@ DORP INDEX unq_account_name ON `yibai_plan_stock`.`yibai_fba_manager_account`;
 （5）聚集函数MIN()，MAX()中的字段；
 
 （6）order by和group by字段；
+
+（7）频繁作为查询条件的字段应该创建索引
+
 
 
 
@@ -82,6 +85,8 @@ DORP INDEX unq_account_name ON `yibai_plan_stock`.`yibai_fba_manager_account`;
 （5）MySQL能估计出全表扫描比使用索引更快时，不使用索引；
 
  (6) 时间类型的字段 如果数据类型为int不建议加索引 如果字段类型为datetime类型建议加索引
+
+（7）where 条件用不到的字段不适合创建索引
 
 
 

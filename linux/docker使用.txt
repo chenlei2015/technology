@@ -1,0 +1,45 @@
+﻿1. docker的安装 
+
+2. docker -v                   docker的版本号
+
+3. systemctl start docker      启动DOCKER
+
+4. systemctl stop docker       关闭DOCKER
+
+5. systemctl restart docker     重启docker
+
+
+5. docker images               你本地docker镜像列表
+
+6. docker pull hello-world     获取hello-world镜像
+
+7. sudo docker run hello-world 运行hello-world镜像
+
+8. docker ps | awk 'NR > 1 {print $1}'  // 获取容器id
+
+9. docker container exec -it 容器id /bin/bash //进入到容器
+
+10.docker rm -f 容器id/容器名
+
+
+
+
+
+
+示例：
+
+启动并产生一个容器
+
+1.  docker run -itd -p 9501:9501 -v /home/wwwroot/hyperf:/home/wwwroot/ --name=hyperf  phpdockerio/php72-fpm /bin/sh 
+
+
+docker run -dit \
+-p 80:80 \
+-p 443:443 \
+-p 3306:3306 \
+-p 9000:9000 \
+-v /home/wwwroot:/home/wwwroot \
+-v /usr/local/mysql:/usr/local/mysql \
+--privileged=true \
+--name=lnmp \
+2233466866/lnmp

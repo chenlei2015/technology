@@ -6,6 +6,7 @@ D:\code\Redis-x64-3.0.504\redis-server.exe redis.windows.conf
 打开cmd窗口 启动redis客户端
 D:\code\Redis-x64-3.0.504\redis-cli.exe -h 127.0.0.1 -p 6379
 
+
 //需要密码的情况下
 auth 123456（密码）
 
@@ -13,7 +14,15 @@ auth 123456（密码）
 
 D:\code\Redis-x64-3.0.504\redis-cli.exe -h 192.168.71.141 -p 7001
 
-auth yis@2019._ 
+auth yis@2019._
+
+//虚拟机客户端
+D:\code\Redis-x64-3.0.504\redis-cli.exe -h 192.168.31.29 -p 6379   // redis-cli -h 192.168.31.29 -p 6379 -a 123456
+auth 123456
+
+//虚拟机服务端重启：
+pkill redis 
+redis-server /usr/local/redis/etc/redis.conf &
 
 
 redis的说明：因为Redis是单线程的，所以假设A和B同时去Redis中加锁，必然有先后顺序 即使在高并发下 也不会出现A与B同时加锁成功的情况。
